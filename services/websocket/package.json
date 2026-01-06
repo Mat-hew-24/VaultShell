@@ -1,0 +1,28 @@
+{
+  "name": "syncpad-websocket",
+  "version": "1.0.0",
+  "description": "WebSocket server for SyncPad real-time features",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0",
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "axios": "^1.6.7",
+    "redis": "^4.6.13",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  },
+  "keywords": [
+    "websocket",
+    "realtime",
+    "syncpad"
+  ],
+  "author": "",
+  "license": "ISC"
+}
