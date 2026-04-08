@@ -18,7 +18,7 @@ def enter_container(container_name):
     if not user:
         click.echo("Authentication Failed.")
         return
-    if not is_authorized:
+    if not is_authorized(user, container_name):
         click.echo("Access Denied.")
         return
     launch(user, container_name)

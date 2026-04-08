@@ -6,5 +6,6 @@ docker==7.1.0
 idna==3.11
 pexpect==4.9.0
 ptyprocess==0.7.0
+pytest==8.4.2
 requests==2.33.1
 urllib3==2.6.3

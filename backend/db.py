@@ -35,7 +35,8 @@ def init_db():
             started_at TEXT,
             ended_at TEXT,
             log_file TEXT
-      """
+                );
+                """
     )
     conn.commit()
     conn.close()
@@ -95,7 +96,8 @@ def log_start_session(username: str, container_name: str, log_file: str) -> int:
 def log_end_session(session_id: int):
     conn = get_db()
     conn.execute(
-        "UPDATE session_logs SET ended_at = datetime('now) where id = ?", (session_id,)
+        "UPDATE session_logs SET ended_at = datetime('now') WHERE id = ?",
+        (session_id,),
     )
     conn.commit()
     conn.close()
