@@ -1,2 +1,3 @@
 .venv
-vault.db
+vaultshell.db
+__pycache__

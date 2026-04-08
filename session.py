@@ -1,4 +1,4 @@
-import os, subprocess, datetime, pty, docker
+import os, datetime, pty, docker
 from db import log_end_session, log_start_session
 
 
