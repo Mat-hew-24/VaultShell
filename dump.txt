@@ -1,0 +1,4 @@
+things to install in system
+
+inotify-tools
+ansi2txt

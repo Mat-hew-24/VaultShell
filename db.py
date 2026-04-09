@@ -1,7 +1,7 @@
 import sqlite3
 from pathlib import Path
 
-DB_PATH = Path(__file__).parent / "vaultshell.db"
+DB_PATH = Path.home() / "vaultshell.db"
 
 
 def get_db():

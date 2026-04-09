@@ -1,5 +1,13 @@
-import os, datetime, pty, docker
+import os, datetime, pty, docker, subprocess
 from db import log_end_session, log_start_session
+
+watcher = None
+
+
+def start_watcher():
+    global watcher
+    if watcher is None or watcher.poll() is not None:
+        watcher = subprocess.Popen(["bash", "watch.sh"])
 
 
 def launch(user, container_name):
@@ -12,6 +20,7 @@ def launch(user, container_name):
     except docker.errors.NotFound:
         print(f"Container '{container_name}' not found.")
         return
+    start_watcher()
     log_path = f"logs/{user['username']}_{container_name}_{datetime.datetime.now():%Y%m%d_%H%M%S}.log"
     os.makedirs("logs", exist_ok=True)
     session_id = log_start_session(user["username"], container_name, log_path)

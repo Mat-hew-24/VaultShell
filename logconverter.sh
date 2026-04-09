@@ -1,0 +1,14 @@
+#!/bin/bash
+
+LOGS_DIR="logs"
+OUT_DIR="logstxt"
+
+mkdir -p "$OUT_DIR"
+
+inotifywait -m -e close_write --format '%f' "$LOGS_DIR" | while read filename; do
+    input="$LOGS_DIR/$filename"
+    output="$OUT_DIR/${filename%.*}.txt"
+    sleep 1
+    ansi2txt < "$input" > "$output"
+    echo "Processed: $filename -> $output"
+done
