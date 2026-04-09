@@ -1,7 +1,7 @@
 #!/bin/bash
 
-LOGS_DIR="logs"
-OUT_DIR="logstxt"
+LOGS_DIR="${1:-logs}"
+OUT_DIR="${2:-logstxt}"
 
 mkdir -p "$OUT_DIR"
 

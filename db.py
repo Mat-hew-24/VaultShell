@@ -1,7 +1,28 @@
-import sqlite3
+import sqlite3, sys, os
 from pathlib import Path
 
-DB_PATH = Path.home() / "vaultshell.db"
+if getattr(sys, "frozen", False):
+    BASE_DIR = Path(sys.argv[0]).resolve().parent
+else:
+    BASE_DIR = Path(__file__).parent
+
+DB_DIR = Path("/var/lib/vaultshell")
+DB_PATH = DB_DIR / "vaultshell.db"
+DATA_DIR = Path("/var/lib/vaultshell")
+
+
+def _init_db_dir():
+    if not DB_DIR.exists():
+        try:
+            DB_DIR.mkdir(parents=True, mode=0o700)
+        except PermissionError:
+            print("Error: Run 'sudo vaultshell' once to initialize.")
+            sys.exit(1)
+    if os.geteuid() == 0:
+        os.chmod(DB_DIR, 0o700)
+
+
+_init_db_dir()
 
 
 def get_db():
@@ -12,8 +33,7 @@ def get_db():
 
 def init_db():
     conn = get_db()
-    cursor = conn.cursor()
-    cursor.executescript(
+    conn.executescript(
         """
             CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -40,6 +60,8 @@ def init_db():
     )
     conn.commit()
     conn.close()
+    if os.geteuid() == 0:
+        os.chmod(DB_PATH, 0o600)
 
 
 def get_user(username: str):

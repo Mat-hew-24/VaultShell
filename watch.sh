@@ -1,3 +1,6 @@
 #!/bin/bash
 
-nohup bash logconverter.sh > watch.log 2>&1 &
+LOGS_DIR="/var/lib/vaultshell/logs"
+OUT_DIR="/var/lib/vaultshell/logstxt"
+
+nohup bash /usr/local/bin/logconverter.sh "$LOGS_DIR" "$OUT_DIR" > "/var/lib/vaultshell/watch.log" 2>&1 &

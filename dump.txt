@@ -2,3 +2,7 @@ things to install in system
 
 inotify-tools
 ansi2txt
+
+
+chmod 600 vaultshell.db
+sudo gpasswd -d $USER docker
